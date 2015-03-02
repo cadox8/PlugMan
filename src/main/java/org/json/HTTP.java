@@ -1,39 +1,44 @@
 package org.json;
 
 /*
-Copyright (c) 2002 JSON.org
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-The Software shall be used for Good, not Evil.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
+ * #%L
+ * PlugMan
+ * %%
+ * Copyright (C) 2010 - 2015 PlugMan
+ * %%
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ * #L%
+ */
 
 import java.util.Iterator;
 
 /**
  * Convert an HTTP header to a JSONObject and back.
+ *
  * @author JSON.org
  * @version 2014-05-03
  */
 public class HTTP {
 
-    /** Carriage return/line feed. */
+    /**
+     * Carriage return/line feed.
+     */
     public static final String CRLF = "\r\n";
 
     /**
@@ -63,15 +68,16 @@ public class HTTP {
      * ...}</pre>
      * It does no further checking or conversion. It does not parse dates.
      * It does not do '%' transforms on URLs.
+     *
      * @param string An HTTP header string.
      * @return A JSONObject containing the elements and attributes
      * of the XML string.
      * @throws JSONException
      */
     public static JSONObject toJSONObject(String string) throws JSONException {
-        JSONObject     jo = new JSONObject();
-        HTTPTokener    x = new HTTPTokener(string);
-        String         token;
+        JSONObject jo = new JSONObject();
+        HTTPTokener x = new HTTPTokener(string);
+        String token;
 
         token = x.nextToken();
         if (token.toUpperCase().startsWith("HTTP")) {
@@ -119,15 +125,16 @@ public class HTTP {
      * }</pre>
      * Any other members of the JSONObject will be output as HTTP fields.
      * The result will end with two CRLF pairs.
+     *
      * @param jo A JSONObject
      * @return An HTTP header string.
      * @throws JSONException if the object does not contain enough
-     *  information.
+     *                       information.
      */
     public static String toString(JSONObject jo) throws JSONException {
-        Iterator<String>    keys = jo.keys();
-        String              string;
-        StringBuilder       sb = new StringBuilder();
+        Iterator<String> keys = jo.keys();
+        String string;
+        StringBuilder sb = new StringBuilder();
         if (jo.has("Status-Code") && jo.has("Reason-Phrase")) {
             sb.append(jo.getString("HTTP-Version"));
             sb.append(' ');
@@ -148,9 +155,9 @@ public class HTTP {
         sb.append(CRLF);
         while (keys.hasNext()) {
             string = keys.next();
-            if (!"HTTP-Version".equals(string)      && !"Status-Code".equals(string) &&
+            if (!"HTTP-Version".equals(string) && !"Status-Code".equals(string) &&
                     !"Reason-Phrase".equals(string) && !"Method".equals(string) &&
-                    !"Request-URI".equals(string)   && !jo.isNull(string)) {
+                    !"Request-URI".equals(string) && !jo.isNull(string)) {
                 sb.append(string);
                 sb.append(": ");
                 sb.append(jo.getString(string));
