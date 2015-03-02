@@ -18,6 +18,7 @@ enable:
 error:
   ignored: '&cPlugMan is configured to ignore that plugin.'
   invalid-plugin: '&cThat is not a valid plugin.'
+  invalid-slug: '&cThat is not a valid slug.'
   no-permission: '&cYou do not have permission to do this.'
   specify-plugin: '&cYou must specify a plugin.'
   usage:
@@ -37,6 +38,7 @@ help:
   load: '&7- &a/plugman load [plugin] &f- &7Load a plugin.'
   reload: '&7- &a/plugman reload [plugin|all] &f- &7Reload a plugin.'
   unload: '&7- &a/plugman unload [plugin] &f- &7Unload a plugin.'
+  install: '&7- &a/plugman install [plugin] &f- &Install a plugin.'
 info:
   header: 'Plugin Information: {0}'
   version: '&7- Version: &a{0}'

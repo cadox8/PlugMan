@@ -32,6 +32,7 @@ import com.rylinaux.plugman.command.DumpCommand;
 import com.rylinaux.plugman.command.EnableCommand;
 import com.rylinaux.plugman.command.HelpCommand;
 import com.rylinaux.plugman.command.InfoCommand;
+import com.rylinaux.plugman.command.InstallCommand;
 import com.rylinaux.plugman.command.ListCommand;
 import com.rylinaux.plugman.command.LoadCommand;
 import com.rylinaux.plugman.command.ReloadCommand;
@@ -94,6 +95,9 @@ public class PlugManCommandHandler implements CommandExecutor {
                 break;
             case "unload":
                 cmd = new UnloadCommand(sender);
+                break;
+            case "install":
+                cmd = new InstallCommand(sender);
                 break;
         }
 
