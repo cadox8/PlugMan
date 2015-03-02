@@ -27,13 +27,13 @@ package com.rylinaux.plugman.command;
  */
 
 
-import org.json.JSONObject;
-
 import com.rylinaux.plugman.PlugMan;
 import com.rylinaux.plugman.util.BukgetUtil;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+
+import org.json.JSONObject;
 
 /**
  * Command that installs plugins from DBO.
