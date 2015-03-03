@@ -26,6 +26,9 @@ package com.rylinaux.plugman.util;
  * #L%
  */
 
+import com.google.common.io.ByteStreams;
+
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -110,19 +113,18 @@ public class BukgetUtil {
 
     public static void downloadPlugin(String pluginName, String downloadUrl) {
 
-        HttpClient client = HttpClients.createMinimal();
+        HttpClient client = HttpClients.createDefault();
         HttpGet get = new HttpGet(downloadUrl);
 
         try {
 
             HttpResponse response = client.execute(get);
 
-            InputStream inputStream = response.getEntity().getContent();
-            OutputStream outputStream = new FileOutputStream("plugins/" + pluginName + ".jar");
+            FileOutputStream output = new FileOutputStream(new File("plugins" + File.separator + pluginName + ".jar"));
 
-            IOUtils.copy(inputStream, outputStream);
+            ByteStreams.copy(response.getEntity().getContent(), output);
 
-            outputStream.close();
+            output.close();
 
         } catch (IOException e) {
 
